@@ -3,4 +3,10 @@ from django.http import HttpResponse
 
 
 def index(request):
-    return HttpResponse('hello world')
+    return render(request, 'index.html')
+
+
+def counter(request):
+    words = request.POST['words']
+    amt_of_words = len(words.split())
+    return render(request, 'counter.html', {'text': amt_of_words})
