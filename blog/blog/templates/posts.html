@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Blog posts</title>
+
+    <style>
+        *{
+        box-sizing: border-box;
+        }
+        body{
+        font-family: Arial;
+        padding: 20px;
+        background: #f1f1f1;
+        }
+        .header {
+        padding: 2px;
+        font-size: 40px;
+        text-align: center;
+        background: white;
+        }
+        .card{
+        background-color: white;
+        padding: 20px;
+        margin-top: 20px;
+        }
+        .row:after{
+        content: "";
+        display: table;
+        clear: both;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Femi's Blog</h1>
+</div>
+
+<div class="row">
+    <div class="left_column">
+        <div class="card">
+            <h2>{{ posts.title }}</h2>
+            <h5>{{ posts.created_at }}</h5>
+            <p>{{ posts.body}}</p>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
