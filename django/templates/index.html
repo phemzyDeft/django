@@ -1,40 +1,49 @@
-<!DOCTYPE html>
+{% load static %}
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <title>University</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <link rel="preconnect" href="{% static 'https://fonts.googleapis.com' %}" />
+    <link rel="preconnect" href="{% static 'https://fonts.gstatic.com' %}" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap"
-      rel="stylesheet"
-    />
+      href="{% static 'https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600;700&display=swap' %}"
+      rel="stylesheet"/>
     <link
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+      href="{% static 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css' %}"/>
   </head>
   <body>
     <section class="header">
       <nav>
-        <a href="index.html"><img src="img/logo.png" alt="logo" /></a>
+        <a href="{% static 'index.html' %}"><img src="static/img/logo.png" alt="logo" /></a>
         <div class="nav_link" id="navLinks">
           <i class="fa fa-times" onclick="hideMenu()"></i>
           <ul>
             <li><a href="#">HOME</a></li>
-            <li><a href="#">ABOUT</a></li>
+            <li><a href="about">ABOUT</a></li>
             <li><a href="#">COURSE</a></li>
             <li><a href="#">BLOG</a></li>
-            <li><a href="#">CONTACT</a></li>
+
+              {% if user.is_authenticated %}
+            <li><a href="logout">LOGOUT</a></li>
+              {% else %}
+              <li><a href="register">LOGIN OR SIGNUP</a></li>
+              {% endif %}
           </ul>
         </div>
         <i class="fa fa-bars" onclick="showMenu()"></i>
       </nav>
       <div class="text_box">
-        <h1>World's Biggest University</h1>
+          {% if user.is_authenticated %}
+        <h1>Welcome, {{ user.username }}</h1>
+          {% else %}
+          <h1>World's Biggest University</h1>
+          {% endif %}
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Similique
           consequatur, <br />nulla, vitae cumque soluta ad voluptatum quisquam
@@ -50,34 +59,18 @@
       <p>
         Lorem ipsum dolor, sit amet consectetur adipisicing elit.
       </p>
-      <div class="row">
-        <div class="course_col">
-          <h3>Intermediate</h3>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Perspiciatis libero unde praesentium fugiat quibusdam, dolorum
-            deleniti, sint omnis ab saepe eaque sunt.
-          </p>
-        </div>
 
-        <div class="course_col">
-         <h3>Degree</h3>
-         <p>
-           Lorem ipsum dolor sit amet consectetur adipisicing elit.
-           Perspiciatis libero unde praesentium fugiat quibusdam, dolorum
-           deleniti, sint omnis ab saepe eaque sunt.
-         </p>
-       </div>
+          <div class="row">
+              {% for feature in features %}
+            <div class="course_col">
+              <h3>{{feature.name}}</h3>
+              <p>
+                  {{ feature.details }}
+              </p>
+            </div>
+              {% endfor %}
+          </div>
 
-       <div class="course_col">
-         <h3>Post Graduate</h3>
-         <p>
-           Lorem ipsum dolor sit amet consectetur adipisicing elit.
-           Perspiciatis libero unde praesentium fugiat quibusdam, dolorum
-           deleniti, sint omnis ab saepe eaque sunt.
-         </p>
-       </div>
-      </div>
    </section>
 
    <!-- ---------campus-------- -->
@@ -87,21 +80,21 @@
 
       <div class="row">
          <div class="campus_col">
-            <img src="img/london.png" alt="london">
+            <img src="{% static 'img/london.png' %}" alt="london">
             <div class="layer">
                <h3>LONDON</h3>
             </div>
          </div>
 
          <div class="campus_col">
-            <img src="img/newyork.png" alt="london">
+            <img src="{% static 'img/newyork.png' %}" alt="london">
             <div class="layer">
                <h3>NEWYORK</h3>
             </div>
          </div>
 
          <div class="campus_col">
-            <img src="img/washington.png" alt="london">
+            <img src="{% static 'img/washington.png' %}" alt="london">
             <div class="layer">
                <h3>WASHINGTON</h3>
             </div>
@@ -116,21 +109,21 @@
       
       <div class="row">
          <div class="facilities_col">
-            <img src="img/library.png" alt="library">
+            <img src="{% static 'img/library.png' %}" alt="library">
             <h3>World Class library</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis libero unde 
                praesentium fugiat quibusdam.</p>
          </div>
 
          <div class="facilities_col">
-            <img src="img/basketball.png" alt="basketball">
+            <img src="{% static 'img/basketball.png' %}" alt="basketball">
             <h3>Largest Play Ground</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis libero unde 
                praesentium fugiat quibusdam.</p>
          </div>
 
          <div class="facilities_col">
-            <img src="img/cafeteria.png" alt="cafeteria">
+            <img src="{% static 'img/cafeteria.png' %}" alt="cafeteria">
             <h3>Tasty and Healthy Food</h3>
             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis libero unde 
                praesentium fugiat quibusdam.</p>
@@ -144,28 +137,28 @@
       <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
       <div class="row">
          <div class="testimonials_col">
-            <img src="img/user1.jpg" alt="user1">
+            <img src="{% static 'img/user1.jpg' %}" alt="user1">
             <div>
                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus explicabo quis molestias ipsam corporis voluptas, nisi earum, repudiandae perspiciatis ad sit tempore rem obcaecati doloribus quasi ipsum harum temporibus fugit.</p>
                <h3>Johnson Anabel</h3>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-o"></i>
+               <i class="{% static 'fa fa-star' %}"></i>
+               <i class="{% static 'fa fa-star' %}"></i>
+               <i class="{% static 'fa fa-star' %}"></i>
+               <i class="{% static 'fa fa-star' %}"></i>
+               <i class="{% static 'fa fa-star-o' %}"></i>
             </div>
          </div>
 
          <div class="testimonials_col">
-            <img src="img/user2.jpg" alt="user1">
+            <img src="{% static 'img/user2.jpg' %}" alt="user1">
             <div>
                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellendus explicabo quis molestias ipsam corporis voluptas, nisi earum, repudiandae perspiciatis ad sit tempore rem obcaecati doloribus quasi ipsum harum temporibus fugit.</p>
                <h3>David Bezos</h3>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star"></i>
-               <i class="fa fa-star-half-o"></i>
+               <i class="{% static 'fa fa-star' %}"></i>
+               <i class="{% static 'fa fa-star' %}"></i>
+               <i class="{% static 'fa fa-star' %}"></i>
+               <i class="{% static 'fa fa-star' %}"></i>
+               <i class="{% static 'fa fa-star-half-o' %}"></i>
             </div>
          </div>
          
