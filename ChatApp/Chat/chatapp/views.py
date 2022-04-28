@@ -1,12 +1,22 @@
-from crypt import methods
+import re
 from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
 from .models import Room, Message
 
-def home(request):
+
+def Home (request):
     return render(request, 'home.html')
 
+
 def room(request, room):
-    return render(request, 'room.html')
+    username = request.GET.get('username')
+    room_details = Room.objects.get(name=room)
+    return render(request, 'room.html', {
+        'username': username, 
+        'room_details': room_details,
+        'room': room, 
+    })
+
 
 def checkview(request):
     room = request.POST['room_name']

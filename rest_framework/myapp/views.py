@@ -1,7 +1,8 @@
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics, permissions
 from .serializers import BookSerializer
 from .models import Book
+from rest_framework.views import APIView
 
 
 class BookList(generics.ListCreateAPIView):
@@ -10,4 +11,5 @@ class BookList(generics.ListCreateAPIView):
 
 
 class BookDetails(generics.RetrieveUpdateDestroyAPIView):
-    pass
+    queryset = Book.objects.all()
+    serializer_class = BookSerializer
